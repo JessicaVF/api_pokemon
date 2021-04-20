@@ -76,8 +76,23 @@ function poke_Evolution(evolution_chain, pokeName, id) {
       let itHasAName = myString.includes("name");
       let itHasEvolution = myString.includes("name");
       let itHasSecondEvolution = myString.includes("name", 1500);
+      let itHasBranchEvolutions = data.chain.evolves_to[1];
 
-      if (
+      if (itHasBranchEvolutions) {
+        let pokeSmall = data.chain.species.name;
+        if (pokeName != pokeSmall) {
+          let text = `${pokeName} it's part of multibranch evolution chain, it evolves from ${pokeSmall}`;
+          pokeSection.append(text);
+        } else if (pokeName == pokeSmall) {
+          let text = `${pokeName} it's part of multibranch evolution chain, it can evolve into: `;
+          for (let i = 0; i < data.chain.evolves_to.length; i++) {
+            let temp = data.chain.evolves_to[i].species.name;
+            temp = temp + ", ";
+            text = text + temp;
+          }
+          pokeSection.append(text);
+        }
+      } else if (
         itHasAName == true &&
         itHasEvolution == true &&
         itHasSecondEvolution == false
