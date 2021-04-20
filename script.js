@@ -1,5 +1,7 @@
 "use strict";
 
+// Thanks to the https://pokeapi.co/ for making possible this kind of fun projects that help people to learn
+
 //--> first we get the data about the first generation (151 pokemons and other info)
 // Src= The XHR part is based in: https://attacomsian.com/blog/http-requests-xhr
 
@@ -46,12 +48,14 @@ function pokeProcess(pokeJson) {
     getChain(poke.url, poke.name, id);
   }
 }
+// --> This function get us the ID based in the url number
+
 function getPokeId(pokeUrl) {
   let id = pokeUrl.substring(pokeUrl.indexOf("species") + 8);
   id = id.slice(0, id.length - 1);
   return id;
 }
-
+// --> Here we get the evolution chain, with all the info about evolutions
 function getChain(pokeUrl, pokeName, id) {
   fetch(pokeUrl)
     .then(function (response) {
@@ -64,7 +68,7 @@ function getChain(pokeUrl, pokeName, id) {
       console.log("error 2");
     });
 }
-//  ---------> I have a exceptionof 24 pokemon, most of them with particular evolutions chains (like evee), but some normal pokemons
+// --> We sort if a pokemon have 0, or more evolutions, also if the evolution chain is in multibranch format. Depending of this and where the pokemon it's in the chain we append a different text
 function poke_Evolution(evolution_chain, pokeName, id) {
   fetch(evolution_chain)
     .then(function (response) {
@@ -87,8 +91,7 @@ function poke_Evolution(evolution_chain, pokeName, id) {
           let text = `${pokeName} it's part of multibranch evolution chain, it can evolve into: `;
           for (let i = 0; i < data.chain.evolves_to.length; i++) {
             let temp = data.chain.evolves_to[i].species.name;
-            temp = temp + ", ";
-            text = text + temp;
+            text = text + ", " + temp;
           }
           pokeSection.append(text);
         }
