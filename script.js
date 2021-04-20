@@ -75,13 +75,7 @@ function poke_Evolution(evolution_chain, pokeName, id) {
       let myString = JSON.stringify(data);
 
       let itHasEvolution = myString.includes("evolves_to");
-      let itHasSecondEvolution = myString.includes("evolves_to", 600);
-      if (pokeName == "slowpoke") {
-        console.log("HEEEEEEREeeeeeeeeeeeeeeeee");
-        console.log(pokeName);
-        console.log(itHasEvolution);
-        console.log(itHasSecondEvolution);
-      }
+      let itHasSecondEvolution = myString.includes("evolves_to", 1500);
 
       if (itHasEvolution == false && itHasSecondEvolution == false) {
         let text = `${pokeName} is a only child, it does not have evolution chain`;
@@ -111,25 +105,32 @@ function poke_Evolution(evolution_chain, pokeName, id) {
           pokeSection.append(text);
         }
       }
-
-      //   let pokeSmall = data.chain.species.name;
-
-      //   let pokeMedium = data.chain.evolves_to[0].species.name;
-      //   let pokeLarge = data.chain.evolves_to[0].evolves_to[0].species.name;
-      //   let pokeSection = $(`[data-id='${id}']`);
-
-      //   if (pokeName == pokeSmall) {
-      //     let text = `${pokeName} is the baby of the house, it evolves into ${pokeMedium}`;
-      //     pokeSection.append(text);
-      //   } else if (pokeName == pokeMedium) {
-      //     let text = `${pokeName} is the middle kid of the house, is the evolution of ${pokeSmall} and it evolves into ${pokeLarge}`;
-      //     pokeSection.append(text);
-      //   } else if (pokeName == pokeLarge) {
-      //     let text = `${pokeName} is the older kid of the house, is the evolution of ${pokeMedium}`;
-      //     pokeSection.append(text);
-      //   }
     })
     .catch(function (error) {
       console.log("error 3 " + pokeName);
     });
 }
+
+//console.log(itHasEvolution);
+// console.log(itHasSecondEvolution);
+// let pokeMedium = data.chain.evolves_to[0].species.name;
+// console.log(pokeMedium);
+// let pokeLarge = data.chain.evolves_to[0].evolves_to[0].species.name;
+// console.log(pokeLarge);
+
+//   let pokeSmall = data.chain.species.name;
+
+//   let pokeMedium = data.chain.evolves_to[0].species.name;
+//   let pokeLarge = data.chain.evolves_to[0].evolves_to[0].species.name;
+//   let pokeSection = $(`[data-id='${id}']`);
+
+//   if (pokeName == pokeSmall) {
+//     let text = `${pokeName} is the baby of the house, it evolves into ${pokeMedium}`;
+//     pokeSection.append(text);
+//   } else if (pokeName == pokeMedium) {
+//     let text = `${pokeName} is the middle kid of the house, is the evolution of ${pokeSmall} and it evolves into ${pokeLarge}`;
+//     pokeSection.append(text);
+//   } else if (pokeName == pokeLarge) {
+//     let text = `${pokeName} is the older kid of the house, is the evolution of ${pokeMedium}`;
+//     pokeSection.append(text);
+//   }
