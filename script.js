@@ -73,11 +73,15 @@ function poke_Evolution(evolution_chain, pokeName, id) {
     .then(function (data) {
       let pokeSection = $(`[data-id='${id}']`);
       let myString = JSON.stringify(data);
+      let itHasAName = myString.includes("name");
+      let itHasEvolution = myString.includes("name");
+      let itHasSecondEvolution = myString.includes("name", 1500);
 
-      let itHasEvolution = myString.includes("evolves_to");
-      let itHasSecondEvolution = myString.includes("evolves_to", 1500);
-
-      if (itHasEvolution == false && itHasSecondEvolution == false) {
+      if (
+        itHasAName == true &&
+        itHasEvolution == true &&
+        itHasSecondEvolution == false
+      ) {
         let text = `${pokeName} is a only child, it does not have evolution chain`;
         pokeSection.append(text);
       } else if (itHasEvolution == true && itHasSecondEvolution == false) {
@@ -94,6 +98,7 @@ function poke_Evolution(evolution_chain, pokeName, id) {
         let pokeSmall = data.chain.species.name;
         let pokeMedium = data.chain.evolves_to[0].species.name;
         let pokeLarge = data.chain.evolves_to[0].evolves_to[0].species.name;
+
         if (pokeName == pokeSmall) {
           let text = `${pokeName} is the baby of the house, it evolves into ${pokeMedium}`;
           pokeSection.append(text);
